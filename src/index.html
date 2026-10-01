@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>帧迹 · 视频追踪分析工具 · 唐龙</title>
+<title>帧迹物理 · 视频追踪分析工具 · 唐龙</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
@@ -212,8 +212,8 @@ button:disabled{opacity:.4;cursor:not-allowed}
 <div id="watermark"></div>
 
 <header id="menubar">
-  <!-- ★ 需求3：软件名「帧迹」 -->
-  <div id="appBrand" title="帧迹 · 视频追踪分析工具"><span class="brand-mark">◈</span>帧迹</div>
+  <!-- ★ 需求3：软件名「帧迹物理」 -->
+  <div id="appBrand" title="帧迹物理 · 视频追踪分析工具"><span class="brand-mark">◈</span>帧迹物理</div>
 
   <div class="menu-item" data-menu="file"><span>文件</span>
     <div class="dropdown">
@@ -642,7 +642,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
       </div>
 
       <div class="aboutFooter">
-        <b>帧迹 · 视频追踪分析工具</b><br>
+        <b>帧迹物理 · 视频追踪分析工具</b><br>
         作者：唐龙 · 公众号：Mli随笔 · 抖音 / B站：教物理的唐长老
       </div>
     </div>
@@ -4402,7 +4402,7 @@ function deserializePeriod(obj) {
 }
 $('btnSaveProj').addEventListener('click', async () => {
   const proj = {
-    version: 18, author: '唐龙', appName: '帧迹', savedAt: new Date().toISOString(),
+    version: 18, author: '唐龙', appName: '帧迹物理', savedAt: new Date().toISOString(),
     videoName: S.videoName,
     vw: S.vw, vh: S.vh, duration: S.duration,
     rotAngle: S.rotAngle, originRaw: S.originRaw,
@@ -5079,7 +5079,7 @@ function buildReportHTML() {
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>帧迹 · 视频追踪分析报告 · 唐龙</title>
+<title>帧迹物理 · 视频追踪分析报告 · 唐龙</title>
 <style>
   body { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; max-width: 900px; margin: 24px auto; color: #222; line-height: 1.6; }
   h1 { text-align: center; font-size: 22px; margin-bottom: 4px; letter-spacing: 2px; }
@@ -5104,7 +5104,7 @@ function buildReportHTML() {
 </style>
 </head>
 <body>
-<h1>帧迹 · 视频追踪分析报告</h1>
+<h1>帧迹物理 · 视频追踪分析报告</h1>
 <div class="author-line">作者：<b>唐龙</b> &nbsp;|&nbsp; 公众号：Mli随笔 &nbsp;|&nbsp; 抖音 / B站：教物理的唐长老</div>
 <div class="meta">生成时间：${dateStr}</div>
 <div class="scope">📊 图表显示方式：<b>${scopeTxt}</b></div>
@@ -5134,7 +5134,7 @@ ${chartsHTML}
 <h2>七、数据表</h2>
 ${tableHTML}
 <div class="footer">
-  本报告由「帧迹 · 视频追踪分析工具」自动生成<br>
+  本报告由「帧迹物理 · 视频追踪分析工具」自动生成<br>
   作者：<b>唐龙</b> &nbsp;·&nbsp; 公众号：Mli随笔 &nbsp;·&nbsp; 抖音 / B站：教物理的唐长老
 </div>
 </body>
