@@ -19,28 +19,19 @@
     --shadow:0 12px 40px rgba(0,8,24,.55),0 1px 0 rgba(255,255,255,.05) inset;
   }
   *{box-sizing:border-box;}
-  html,body{height:100%;margin:0;overflow:hidden;}
+  html,body{
+    height:100%;
+    margin:0;
+    overflow:hidden;
+    background:transparent;
+  }
   body{
     font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
     color:var(--text);
     -webkit-user-select:none;user-select:none;
     -webkit-tap-highlight-color:transparent;
-    background:
-      radial-gradient(ellipse 120% 80% at 15% -10%, rgba(56,189,248,.22), transparent 55%),
-      radial-gradient(ellipse 100% 80% at 90% 110%, rgba(129,140,248,.20), transparent 55%),
-      radial-gradient(ellipse 90% 60% at 50% 50%, rgba(14,32,64,.65), transparent 70%),
-      linear-gradient(160deg, #060c18 0%, #0a1428 45%, #0b1020 100%);
     background-attachment:fixed;
     transition:background .5s;
-  }
-  body::before{
-    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:
-      linear-gradient(rgba(120,180,255,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(120,180,255,.035) 1px, transparent 1px);
-    background-size:52px 52px;
-    mask-image:radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
-    -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 100%);
   }
   canvas{position:fixed;inset:0;display:block;touch-action:none;z-index:1;}
   #preview{z-index:2;pointer-events:none;}
@@ -109,8 +100,7 @@
 .shape-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));
   gap:8px;padding:14px;
-  grid-auto-rows:76px;                 /* 行高固定 */
-  /* 3 行固定高度 = 3×格子高 + 2×间隙 + 上下内边距 */
+  grid-auto-rows:76px;
   min-height:calc(76px * 3 + 8px * 2 + 14px * 2);
   max-height:calc(76px * 3 + 8px * 2 + 14px * 2);
   overflow-y:auto;scrollbar-width:thin;
@@ -460,7 +450,6 @@
     font-family:ui-monospace,Menlo,Consolas,monospace;color:#bae6fd;
     border:1px solid rgba(120,180,255,.2);
   }
-/* ===== 关于：作者信息卡片 ===== */
 .author-card{
   margin-top:16px;padding:14px 16px;
   background:linear-gradient(150deg,rgba(56,189,248,.14),rgba(129,140,248,.10));
@@ -633,6 +622,7 @@
   .lib-item-tag.custom{background:rgba(56,189,248,.18);color:#7dd3fc;}
   .lib-item-tag.builtin{background:rgba(120,180,255,.12);color:#8fa3c0;}
   .lib-item-tag.anim{background:rgba(255,178,102,.18);color:#ffb266;}
+.lib-item-tag.self{background:rgba(168,85,247,.2);color:#c084fc;}
   .lib-hide-btn{width:28px;height:28px;flex:none;padding:0;border-radius:8px;
     border:1px solid transparent;background:transparent;color:var(--text-dim);
     cursor:pointer;display:grid;place-items:center;transition:.15s;}
@@ -669,7 +659,6 @@
     max-width:80vw;text-align:center;
   }
 
-  /* ============ 小程序 ============ */
   #widgetLayer{
     position:fixed;inset:0;z-index:400;pointer-events:none;
   }
@@ -839,7 +828,6 @@
     color:#7dd3fc;font-size:13px;font-weight:600;
   }
 
-  /* 点名器 */
   .rollcall-stage{
     background:rgba(8,16,32,.6);
     border:1px solid rgba(120,180,255,.14);
@@ -886,7 +874,6 @@
   .rollcall-names-panel textarea:focus{border-color:var(--accent);}
   .rollcall-hint{font-size:11.5px;color:#97a3b6;margin-top:6px;line-height:1.5;}
 
-  /* 骰子 */
   .dice-row{
     display:flex;flex-wrap:wrap;justify-content:center;
     gap:10px;margin:6px 0 10px;min-height:64px;align-items:center;
@@ -923,7 +910,6 @@
   .die-dot:nth-child(8){grid-area:3/2;}
   .die-dot:nth-child(9){grid-area:3/3;}
 
-  /* 随机数 */
   .random-list{
     display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
     margin:8px 0 4px;
@@ -938,7 +924,6 @@
     animation:popIn .3s cubic-bezier(.34,1.6,.64,1);
   }
 
-  /* 秒表计次 */
   .lap-list{
     max-height:110px;overflow-y:auto;margin-top:8px;
     border:1px solid rgba(120,180,255,.12);border-radius:9px;
@@ -956,7 +941,6 @@
   .lap-row:nth-child(odd){background:rgba(120,180,255,.04);}
   .lap-row b{color:#7dd3fc;font-weight:600;}
 
-  /* 小程序启动器 */
   .miniapp-grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
     gap:10px;margin-top:4px;
@@ -987,7 +971,6 @@
     font-size:11px;color:var(--text-dim);line-height:1.4;
   }
 
-  /* ===== 文字编辑器 ===== */
   .text-editor{
     position:fixed;z-index:300;
     width:min(430px,92vw);
@@ -1058,6 +1041,136 @@
   }
   .te-row{display:flex;gap:6px;flex-wrap:wrap;}
 
+/* ===== 开发者自定义图形弹窗 ===== */
+.self-example-bar {
+  display: flex; gap: 8px; margin-bottom: 12px;
+  flex-wrap: wrap; align-items: center;
+}
+.self-example-label {
+  font-size: 12px; color: #8fa3c0; margin-right: 4px;
+}
+.self-example-btn {
+  flex: 1; min-width: 150px; padding: 10px 14px;
+  background: rgba(120,180,255,.06);
+  border: 1px solid rgba(120,180,255,.18);
+  border-radius: 10px; color: var(--text);
+  font-family: inherit; font-size: 13px; cursor: pointer;
+  text-align: left; display: flex; flex-direction: column; gap: 3px;
+  transition: .15s;
+}
+.self-example-btn:hover {
+  background: rgba(120,180,255,.12);
+  border-color: rgba(120,180,255,.35);
+}
+.self-example-btn.active {
+  background: linear-gradient(135deg,rgba(56,189,248,.28),rgba(129,140,248,.22));
+  border-color: rgba(56,189,248,.6);
+}
+.self-example-btn.self-example-guide {
+  background: linear-gradient(135deg,rgba(251,146,60,.12),rgba(244,63,94,.10));
+  border-color: rgba(251,146,60,.32);
+}
+.self-example-btn.self-example-guide:hover {
+  background: linear-gradient(135deg,rgba(251,146,60,.20),rgba(244,63,94,.16));
+}
+.self-example-btn.self-example-guide.active {
+  background: linear-gradient(135deg,rgba(251,146,60,.28),rgba(244,63,94,.22));
+  border-color: rgba(251,146,60,.6);
+}
+.self-example-sub {
+  font-size: 10.5px; color: #6b7c96; font-weight: 400;
+}
+.self-example-btn.active .self-example-sub { color: #bae6fd; }
+.self-example-detail {
+  display: none; margin-bottom: 12px;
+  border: 1px solid rgba(120,180,255,.18);
+  border-radius: 10px;
+  background: rgba(8,16,32,.5);
+  overflow: hidden;
+}
+.self-example-detail.show {
+  display: block;
+  animation: selIn .18s cubic-bezier(.34,1.3,.64,1);
+}
+.self-example-detail-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 12px;
+  background: rgba(120,180,255,.06);
+  border-bottom: 1px solid rgba(120,180,255,.14);
+}
+.self-example-detail-title {
+  flex: 1; font-size: 12.5px; color: #b8c7de; font-weight: 500;
+}
+.self-example-detail-body {
+  padding: 10px 12px;
+  max-height: 260px; overflow-y: auto;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11px; line-height: 1.6;
+  color: #b8c7de;
+  white-space: pre-wrap; word-break: break-all;
+}
+.self-example-actions {
+  display: flex; gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(120,180,255,.14);
+  background: rgba(120,180,255,.04);
+}
+.self-example-actions .mbtn {
+  height: 30px; padding: 0 12px; font-size: 12px;
+}
+.self-editor-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px; font-size: 12px; color: #8fa3c0;
+}
+.self-guide-body {
+  padding: 12px 14px;
+  font-size: 12.5px; line-height: 1.75; color: #b8c7de;
+}
+.self-guide-body h4 {
+  margin: 12px 0 6px; font-size: 13px; color: #7dd3fc;
+}
+.self-guide-body h4:first-child { margin-top: 0; }
+.self-guide-body p { margin: 6px 0; }
+.self-guide-body ol, .self-guide-body ul {
+  margin: 6px 0; padding-left: 20px;
+}
+.self-guide-body li { margin: 3px 0; }
+.self-guide-prompt-wrap {
+  position: relative; margin: 10px 0;
+}
+.self-guide-prompt {
+  padding: 10px 12px;
+  padding-right: 76px;
+  background: rgba(8,16,32,.6);
+  border: 1px solid rgba(120,180,255,.18);
+  border-radius: 8px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 11.5px; color: #b8c7de;
+  white-space: pre-wrap;
+  max-height: 260px; overflow-y: auto;
+}
+.self-guide-copy {
+  position: absolute; top: 6px; right: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  background: rgba(120,180,255,.15);
+  border: 1px solid rgba(120,180,255,.28);
+  border-radius: 6px;
+  color: #7dd3fc;
+  cursor: pointer;
+  font-family: inherit;
+}
+.self-guide-copy:hover {
+  background: rgba(120,180,255,.28);
+}
+.self-guide-copy.copied {
+  background: rgba(74,222,128,.25);
+  border-color: rgba(74,222,128,.5);
+  color: #4ade80;
+}
+
+
+
   @media (max-width:820px){
     .dbtn{width:56px;height:56px;}
     .dbtn svg{width:21px;height:21px;}
@@ -1077,10 +1190,6 @@
     .mini-display.md{font-size:23px;}
   }
 
-  #minimizeBtn,
-  #closeAppBtn {
-    display: none !important;
-  }
 </style>
 </head>
 <body>
@@ -1110,6 +1219,18 @@
   <button class="sbtn" id="tagParams" style="display:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/><circle cx="18" cy="12" r="2" fill="none"/></svg>
     <span>参数</span>
+  </button>
+  <button class="sbtn" id="tagEnhance" style="display:none;" title="一键清晰（拍照题目增强）">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg>
+    <span>清晰</span>
+  </button>
+  <button class="sbtn" id="tagVideo" style="display:none;" title="视频播放 / 剪切时长">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l5-3v10l-5-3"/></svg>
+    <span>视频</span>
+  </button>
+  <button class="sbtn" id="tagVideoPlay" style="display:none;" title="播放 / 暂停该视频">
+    <svg viewBox="0 0 24 24" fill="currentColor" id="tagVideoPlayIcon"><polygon points="7,5 19,12 7,19"/></svg>
+    <span id="tagVideoPlayText">播放</span>
   </button>
   <button class="sbtn" id="tagTop">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></svg>
@@ -1157,6 +1278,47 @@
 
 <div class="sub-panel" id="paramsPanel">
   <div id="paramsBody"></div>
+</div>
+
+<div class="sub-panel" id="enhancePanel">
+  <div class="pblock">
+    <div class="plabel">对比度 <b id="enhContrastVal">1.25</b></div>
+    <input type="range" id="enhContrast" min="0.5" max="2.5" step="0.05" value="1.25">
+  </div>
+  <div class="pblock">
+    <div class="plabel">亮度 <b id="enhBrightVal">1.08</b></div>
+    <input type="range" id="enhBright" min="0.5" max="2" step="0.02" value="1.08">
+  </div>
+  <div class="pblock">
+    <div class="plabel">锐化 <b id="enhSharpenVal">0.40</b></div>
+    <input type="range" id="enhSharpen" min="0" max="1" step="0.05" value="0.4">
+  </div>
+  <div class="mini-row" style="margin-top:8px;">
+    <button class="mbtn sm" id="enhApply">立即应用</button>
+    <button class="mbtn ghost sm" id="enhReset">恢复原图</button>
+  </div>
+  <div class="tip-line" style="margin-top:10px;">
+    针对拍照题目优化：增强文字边缘对比度、提亮暗部、锐化清晰度。滑杆调整后会自动预览。
+  </div>
+</div>
+
+<div class="sub-panel" id="videoEditPanel">
+  <div class="pblock">
+    <div class="plabel">开始时间（秒）</div>
+    <input type="number" class="gm-input" id="vidTrimStart" step="0.1" min="0">
+    <button class="mbtn ghost sm" id="vidSetStart" style="margin-top:6px;">设为当前播放位置</button>
+  </div>
+  <div class="pblock">
+    <div class="plabel">结束时间（秒）</div>
+    <input type="number" class="gm-input" id="vidTrimEnd" step="0.1" min="0">
+    <button class="mbtn ghost sm" id="vidSetEnd" style="margin-top:6px;">设为当前播放位置</button>
+  </div>
+  <div class="mini-row" style="margin-top:8px;">
+    <button class="mbtn sm" id="vidPreview">预览剪切</button>
+  </div>
+  <div class="tip-line" style="margin-top:10px;">
+    尺寸调整：直接拖动选中框的控制点缩放即可。剪切不修改源视频，仅控制播放区间。
+  </div>
 </div>
 
 <div class="panel shape-panel" id="shapePanel">
@@ -1237,6 +1399,17 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     <span>菜单</span>
   </button>
+  <button class="mini-btn with-text" id="randomSkinBtn" title="一键换肤：在内置背景间循环切换">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="3"/>
+      <circle cx="8" cy="8" r="1.4" fill="currentColor"/>
+      <circle cx="16" cy="8" r="1.4" fill="currentColor"/>
+      <circle cx="8" cy="16" r="1.4" fill="currentColor"/>
+      <circle cx="16" cy="16" r="1.4" fill="currentColor"/>
+      <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+    </svg>
+    <span>换肤</span>
+  </button>
 </div>
 
 <div class="menu-pop" id="menuPop">
@@ -1248,37 +1421,19 @@
     <span class="mtext">小程序</span>
     <span class="mshort">6 项</span>
   </button>
-  <button class="menu-item" data-act="export">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M5 20h14"/></svg>
-    <span class="mtext">导出图片</span>
-    <span class="mshort">PNG</span>
-  </button>
-  <button class="menu-item" data-act="video">
+  <button class="menu-item" data-act="import">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="6" width="12" height="12" rx="2.5"/><path d="M15 10l5-3v10l-5-3"/>
+      <path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/>
     </svg>
-    <span class="mtext">导出动画视频</span>
-    <span class="mshort">WEBM</span>
+    <span class="mtext">导入</span>
+    <span class="mshort">▸</span>
   </button>
-<button class="menu-item" data-act="savefile">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 3h11l3 3v15H5z"/><path d="M8 3v6h7V3"/><path d="M8 14h8v7H8z"/>
-  </svg>
-  <span class="mtext">导出文件</span>
-  <span class="mshort">JSON</span>
-</button>
-<button class="menu-item" data-act="loadfile">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h5l2 2.5h8A1.5 1.5 0 0 1 21 9v8.5A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/>
-    <path d="M12 11v5"/><path d="M9.5 13.5L12 11l2.5 2.5"/>
-  </svg>
-  <span class="mtext">加载文件</span>
-  <span class="mshort">JSON</span>
-</button>
-  <button class="menu-item" data-act="group">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="11" height="11" rx="2.5"/><rect x="10" y="10" width="11" height="11" rx="2.5"/></svg>
-    <span class="mtext">组合为新图形</span>
-    <span class="mshort">Ctrl+G</span>
+  <button class="menu-item" data-act="export">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 21h14"/>
+    </svg>
+    <span class="mtext">导出</span>
+    <span class="mshort">▸</span>
   </button>
   <button class="menu-item" data-act="lib">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/><circle cx="19" cy="18" r="2.5" fill="none"/></svg>
@@ -1297,6 +1452,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1h.2a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
     <span class="mtext">设置</span>
   </button>
+
 </div>
 
 <div class="corner-br">
@@ -1339,12 +1495,108 @@
   </div>
 </div>
 
+<div class="modal" id="importModal">
+  <div class="modal-card" style="max-width:430px;">
+    <div class="modal-head">导入</div>
+    <div class="modal-body">
+      <div class="export-row">
+        <div class="export-opt" data-import="image">
+          <div>
+            <span>插入图片</span>
+            <span class="sub">PNG / JPG，也可直接 Ctrl+V 粘贴</span>
+          </div>
+        </div>
+        <div class="export-opt" data-import="video">
+          <div>
+            <span>导入视频</span>
+            <span class="sub">MP4 / WebM，可剪切时长</span>
+          </div>
+        </div>
+        <div class="export-opt" data-import="file">
+          <div>
+            <span>加载工程文件</span>
+            <span class="sub">.json 白板工程</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn ghost" id="importCancel">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="exportChooserModal">
+  <div class="modal-card" style="max-width:430px;">
+    <div class="modal-head">导出</div>
+    <div class="modal-body">
+      <div class="export-row">
+        <div class="export-opt" data-export="image">
+          <div>
+            <span>导出图片</span>
+            <span class="sub">PNG，当前页 / 全部 / 指定页码</span>
+          </div>
+        </div>
+        <div class="export-opt" data-export="video">
+          <div>
+            <span>导出视频</span>
+            <span class="sub">WebM，可录制动画</span>
+          </div>
+        </div>
+        <div class="export-opt" data-export="file">
+          <div>
+            <span>导出工程文件</span>
+            <span class="sub">.json，含页面与自定义图形</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn ghost" id="exportChooserCancel">取消</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="settingsModal">
   <div class="modal-card">
     <div class="modal-head">设置</div>
     <div class="modal-body">
-      <p style="font-size:12px;color:#8fa3c0;margin-bottom:12px;">画布背景</p>
-      <div class="bg-row" id="bgRow"></div>
+<p style="font-size:12px;color:#8fa3c0;margin-bottom:12px;">画布背景</p>
+<div style="display:flex;gap:8px;margin-bottom:12px;">
+  <button class="mbtn ghost" id="customBgToggleBtn" style="width:100%;height:42px;font-size:13.5px;">🖼 自定义背景</button>
+</div>
+<div class="bg-row" id="bgRow"></div>
+
+<div id="customBgPanel" style="display:none;margin-top:16px;padding:14px;background:rgba(120,180,255,.05);border:1px solid rgba(120,180,255,.16);border-radius:12px;">
+  <div class="pblock">
+    <div class="plabel">上传本地图片</div>
+    <button class="mbtn ghost" id="uploadBgImgBtn" style="width:100%;height:42px;font-size:13px;">📷 选择图片作为背景</button>
+    <input type="file" id="bgImgInput" accept="image/*" style="display:none;">
+  </div>
+  <div class="pblock">
+    <div class="plabel">或自定义渐变</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#8fa3c0;">
+        主色 <input type="color" id="bgColorA" value="#0a1428" style="width:42px;height:34px;border:none;border-radius:7px;cursor:pointer;background:transparent;">
+      </label>
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#8fa3c0;">
+        辅色 <input type="color" id="bgColorB" value="#060c18" style="width:42px;height:34px;border:none;border-radius:7px;cursor:pointer;background:transparent;">
+      </label>
+      <button class="mbtn ghost" id="applyGradBgBtn" style="height:34px;padding:0 14px;font-size:12.5px;">应用渐变</button>
+    </div>
+  </div>
+  <div class="pblock">
+    <div class="plabel">明暗模式</div>
+    <div class="seg-row" id="customBgLightRow">
+      <button class="seg-btn active" data-val="dark">深色（浅笔）</button>
+      <button class="seg-btn" data-val="light">浅色（深笔）</button>
+    </div>
+  </div>
+  <button class="mbtn ghost" id="clearCustomBgBtn" style="width:100%;height:38px;font-size:12.5px;color:#fca5a5;">🗑 清除自定义背景</button>
+  <div class="tip-line" style="margin-top:10px;">
+    图片会自动压缩后保存在本机，<b>下次启动自动恢复</b>。
+  </div>
+</div>
 
       <p style="font-size:12px;color:#8fa3c0;margin:20px 0 12px;">图形吸附</p>
       <div class="seg-row" id="snapToggleRow" style="margin-bottom:12px;">
@@ -1385,20 +1637,20 @@
     <div class="modal-head">关于</div>
     <div class="modal-body">
       <p><b>唐长老超级物理白板</b></p>
-      <p>面向讲台教学的轻量白板工具，所有图形来自同目录的 <b>shapes.js</b> 图形库，可自行扩展。</p>
+      <p>面向讲台教学的轻量白板工具，图形库由云端动态下发，可随时更新而无需重新分发。</p>
 
-      <p style="color:#8fa3c0;font-size:12.5px;">
-        支持多页、自由绘制、图形拖拽 / 缩放 / 旋转，以及边框、填充、线条样式的细致调节；
-        动画图形可独立或全局播放，并可导出为 PNG 图片或 WebM 视频；
-        选中多个图形后还能一键<b>组合为新图形</b>并写回 shapes.js。
-        菜单里还可进入<b>图形库管理</b>管理图形的显示与删除，以及打开<b>小程序</b>浮窗
-        （本地时间、倒计时、秒表、点名器、随机数、骰子）。
-      </p>
+<p style="color:#8fa3c0;font-size:12.5px;">
+  支持多页、自由绘制、图形拖拽 / 缩放 / 旋转，以及边框、填充、线条样式的细致调节；
+  动画图形可独立或全局播放，并可导出为 PNG 图片或 WebM 视频；
+  选中多个图形后还能一键<b>组合为新图形</b>，组合结果保存在本机，重启后仍然可用。
+  菜单里还可进入<b>图形库管理</b>管理图形的显示与删除，以及打开<b>小程序</b>浮窗
+  （本地时间、倒计时、秒表、点名器、随机数、骰子）。
+</p>
 
-      <p style="color:#8fa3c0;font-size:12.5px;">
-        内置图形分类：基础、力学、振动与波、光学、电磁、文字、简笔画、动画、近代物理等。
-        可在 shapes.js 中继续追加新的 <b>shape({...})</b> 定义，保存刷新页面即可生效。
-      </p>
+<p style="color:#8fa3c0;font-size:12.5px;">
+  内置图形分类：基础、力学、振动与波、光学、电磁、文字、简笔画、动画、近代物理等。
+  云端更新图形库后，程序启动时会提示是否升级，选择升级即可使用最新图形。
+</p>
 
       <div class="author-card">
         <div class="author-name">作者：唐龙</div>
@@ -1431,16 +1683,25 @@
       <p>· 双击「橡皮」显示滑动条，向右滑动到底清除本页所有图形；清空后会自动切回画笔。</p>
       <p>· 点「形状」可切换类别并挑选图形，绘制完自动切回「选择」工具，需再点一次图形才会选中。</p>
 
+      <p style="margin-top:12px;"><b>导入与视频</b></p>
+      <p>· 菜单 →「导入」：可插入图片、导入视频或加载 .json 工程文件。</p>
+      <p>· 插入图片后，选中图片会出现「清晰」按钮，可对拍照题目一键增强对比度 / 亮度 / 锐化；滑杆可微调，恢复原图可随时还原。</p>
+      <p>· 导入视频后，选中视频会出现「视频」按钮，可设置开始 / 结束时间剪切播放区间；剪切不修改源视频文件。视频对象支持拖动、缩放、旋转，但不参与像素擦除。</p>
+      <p>· <b>注意：</b>视频文件不会被写入工程 JSON；重新加载工程后，视频对象会显示为占位框，需要重新导入。</p>
+
       <p style="margin-top:12px;"><b>选择与调整</b></p>
-      <p>· 选中图形后，图形下方出现标签：播放 / 重置 / 边框 / 填充 / 参数 / 置顶 / 克隆 / 组合 / 删除。</p>
+      <p>· 选中图形后，图形下方出现标签：播放 / 重置 / 边框 / 填充 / 参数 / 清晰 / 视频 / 置顶 / 克隆 / 组合 / 删除（部分按钮仅对特定对象显示）。</p>
       <p>· 拖动图形可移动；拖动控制点可缩放；拖动上方旋转柄可旋转；拖动顶点可改变线段 / 折线形状。</p>
-      <p>· 框选或按住 <span class="kbd">Ctrl</span> / <span class="kbd">Shift</span> 可多选；<span class="kbd">Ctrl</span>+<span class="kbd">A</span> 全选。</p>
+<p>· 框选或按住 <span class="kbd">Shift</span> 点击可加选/减选；<span class="kbd">Ctrl</span>+<span class="kbd">A</span> 全选。</p>
+<p>· <b>复制拖动</b>：按住 <span class="kbd">Ctrl</span> 再拖动图形（或选区），会<b>复制一份并跟随拖动</b>，原图形留在原地。</p>
+<p>· <b>锁定方向复制</b>：按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> 拖动，复制出的图形只会<b>水平或竖直</b>移动（按拖动方向自动选择）。</p>
+<p>· <b>复制/粘贴</b>：<span class="kbd">Ctrl</span>+<span class="kbd">C</span> 复制选中图形，<span class="kbd">Ctrl</span>+<span class="kbd">V</span> 粘贴（每次粘贴自动错开 20px，不会重叠）。</p>
       <p>· <b>克隆</b>：先选中一个或多个图形，点「克隆」开启克隆模式，再拖动其中任意一个被选中的图形，整个选区会一起复制并跟着手指 / 鼠标拖动；原图形留在原地不动。</p>
       <p>· <b>置顶</b>：把选中图形移到当前页最上层。</p>
 
       <p style="margin-top:12px;"><b>文字</b></p>
       <p>· 选中「文字」工具后在画布点击，会弹出文字输入框，直接输入即可；<b>双击已有文字</b>可重新编辑内容与样式。</p>
-      <p>· 文字支持字体、字号、加粗、斜体、下划线、对齐方式与颜色；这些属性也可在 shapes.js 的文字图形定义里预设默认值。</p>
+<p>· 文字支持字体、字号、加粗、斜体、下划线、对齐方式与颜色；这些属性也可在图形定义里预设默认值。</p>
       <p>· 文字也支持边框 / 填充，填充颜色和不透明度可在标签栏里调整。</p>
 
       <p style="margin-top:12px;"><b>动画</b></p>
@@ -1450,9 +1711,10 @@
       <p>· 「参数」面板里可调动画周期、振幅、角度、质量比等图形参数。</p>
 
       <p style="margin-top:12px;"><b>组合与图形库</b></p>
-      <p>· <b>组合</b>：框选或按住 <span class="kbd">Ctrl</span> / <span class="kbd">Shift</span> 多选两个以上图形后，点「组合」（或按 <span class="kbd">Ctrl</span>+<span class="kbd">G</span>）即可把它们打包成一个新图形，可命名、生成图标、选择类别，并写入 shapes.js 保存。</p>
-      <p>· 保存方式：写入 shapes.js / 生成新的 shapes.js 并下载 / 仅本次会话使用。</p>
-      <p>· <b>图形库管理</b>：菜单 →「图形库管理」（或 <span class="kbd">Ctrl</span>+<span class="kbd">L</span>）。可用类别下拉栏筛选图形，<b>只有自定义（组合）图形能被勾选删除</b>；内置 / 动画图形无法删除，但可以点右侧的<b>眼睛按钮隐藏</b>——隐藏状态会被<b>永久记住</b>（保存在浏览器本地），刷新后依然保持隐藏，再点一次即可恢复显示。</p>
+<p>· <b>组合</b>：框选或按住 <span class="kbd">Shift</span> 多选两个以上图形后，
+   点「组合」（或按 <span class="kbd">Ctrl</span>+<span class="kbd">G</span>）即可把它们打包成一个新图形，可命名、生成图标、选择类别。</p>
+<p>· 组合结果保存在程序目录下的 <b>custom-shapes.json</b>，关闭后重启仍然可用。</p>
+<p>· <b>图形库管理</b>：菜单 →「图形库管理」（或 <span class="kbd">Ctrl</span>+<span class="kbd">L</span>）。可用类别下拉栏筛选图形，<b>只有自定义（组合）图形能被勾选删除</b>；内置 / 动画图形无法删除，但可以点右侧的<b>眼睛按钮隐藏</b>——隐藏状态会被<b>永久记住</b>，重启后依然保持隐藏，再点一次即可恢复显示。</p>
       <p>· 画布上正在使用被删除图形的对象会一并清理，可用 <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> 撤销。</p>
 
       <p style="margin-top:12px;"><b>小程序</b></p>
@@ -1471,34 +1733,42 @@
       <p>· 图形列表和缩略图列表支持手指上下滑动浏览。</p>
 
       <p style="margin-top:12px;"><b>导出</b></p>
-      <p>· 菜单 →「导出图片」：可导出当前页、全部页码或指定页码范围，保存为 PNG。</p>
-      <p>· 菜单 →「导出动画视频」：可把动画图形录制成 WebM 视频，支持当前页 / 全部页面、时长、帧率、清晰度设置。</p>
-      <p>· 设置里可指定导出文件夹，下次打开仍会记住；若不设置则使用浏览器默认下载位置。</p>
+      <p>· 菜单 →「导出」：可导出图片、导出视频或导出工程文件。</p>
+      <p>· 导出图片：可导出当前页、全部页码或指定页码范围，保存为 PNG。</p>
+      <p>· 导出视频：可把动画图形录制成 WebM 视频，支持当前页 / 全部页面、时长、帧率、清晰度设置。</p>
+<p>· 导出的图片、视频、工程文件默认保存在程序目录，可在「设置 → 导出保存位置」中调整。</p>
       <p>· 导出视频需要浏览器支持 MediaRecorder（Chrome / Edge 均可）；<b>录制耗时约等于设定时长</b>，期间请勿操作画布或切换页面。</p>
 
       <p style="margin-top:12px;"><b>设置与快捷键</b></p>
       <p>· 设置里可切换画布背景、开启 / 关闭吸附并调半径、指定导出保存位置。</p>
-      <p>
-        <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> 撤销 ·
-        <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">Z</span> 重做 ·
-        <span class="kbd">Ctrl</span>+<span class="kbd">A</span> 全选 ·
-        <span class="kbd">Ctrl</span>+<span class="kbd">G</span> 组合 ·
-        <span class="kbd">Ctrl</span>+<span class="kbd">L</span> 图形库 ·
-        <span class="kbd">Ctrl</span>+<span class="kbd">D</span> 复制选中 ·
-        <span class="kbd">Del</span> 删除
-      </p>
-      <p>
-        <span class="kbd">空格</span> 播放 / 暂停全部动画 ·
-        <span class="kbd">R</span> 动画归零 ·
-        <span class="kbd">Alt</span> 拖动时临时关闭吸附 ·
-        <span class="kbd">Esc</span> 取消选中 / 关闭弹窗 ·
-        方向键移动选中图形
-      </p>
+ <p>
+  <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> 撤销 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">Z</span> 重做 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">A</span> 全选 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">C</span> 复制 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">V</span> 粘贴 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">G</span> 组合 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">L</span> 图形库 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">D</span> 复制选中并偏移 20px ·
+  <span class="kbd">Del</span> 删除
+</p>
+<p>
+  <span class="kbd">空格</span> 播放 / 暂停全部动画 ·
+  <span class="kbd">R</span> 动画归零 ·
+  <span class="kbd">Alt</span> 拖动时临时关闭吸附 ·
+  <span class="kbd">Esc</span> 取消选中 / 关闭弹窗 ·
+  方向键移动选中图形
+</p>
+<p>
+  <span class="kbd">Ctrl</span>+左键拖动 复制拖动 ·
+  <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+左键拖动 复制并锁定水平/竖直 ·
+  <span class="kbd">Shift</span>+点击 加选/减选
+</p>
 
-      <p style="margin-top:12px;color:#8fa3c0;font-size:12.5px;">
-        图形分类：基础、力学、振动与波、光学、电磁、文字、简笔画、动画、近代物理。<br>
-        所有图形来自同目录的 <b>shapes.js</b>，可自行扩展；保存刷新页面即生效。
-      </p>
+<p style="margin-top:12px;color:#8fa3c0;font-size:12.5px;">
+  图形分类：基础、力学、振动与波、光学、电磁、文字、简笔画、动画、近代物理。<br>
+  图形库从云端加载，作者更新后启动时会提示升级。
+</p>
 
     </div>
     <div class="modal-foot">
@@ -1625,24 +1895,15 @@
         </div>
       </div>
 
-      <div class="pblock">
-        <div class="plabel">工具栏图标</div>
-        <div class="gm-radio">
-          <label><input type="radio" name="gmIcon" value="auto" checked>
-            <span>自动缩略图<span class="sub">用组合图形本身的样子生成图标</span></span></label>
-          <label><input type="radio" name="gmIcon" value="generic">
-            <span>通用组合图标<span class="sub">所有组合图形都用统一的图标</span></span></label>
-        </div>
-      </div>
-
-      <div class="pblock">
-        <div class="plabel">保存方式</div>
-        <div class="gm-radio">
-          <label><input type="radio" name="gmMode" value="persist" checked>
-            <span>保存到本机<span class="sub">永久保存，刷新 / 重启后仍然可用</span></span></label>
-        </div>
-      </div>
-
+<div class="pblock">
+  <div class="plabel">工具栏图标</div>
+  <div class="gm-radio">
+    <label><input type="radio" name="gmIcon" value="auto" checked>
+      <span>自动缩略图<span class="sub">用组合图形本身的样子生成图标</span></span></label>
+    <label><input type="radio" name="gmIcon" value="generic">
+      <span>通用组合图标<span class="sub">所有组合图形都用统一的图标</span></span></label>
+  </div>
+</div>
       <div class="tip-line" id="gmTip"></div>
     </div>
     <div class="modal-foot">
@@ -1657,8 +1918,8 @@
     <div class="modal-head">图形库管理</div>
     <div class="modal-body">
       <div class="lib-toolbar">
-        <button class="mbtn ghost" id="libPickFile" style="height:34px;padding:0 14px;font-size:12.5px;box-shadow:none;">📂 选择 shapes.js</button>
-        <span class="lib-file" id="libFileInfo">未加载文件 · 只操作当前会话（刷新失效）</span>
+        <button class="mbtn ghost" id="libPickFile" style="height:34px;padding:0 14px;font-size:12.5px;box-shadow:none;display:none;">📂 选择 shapes.js</button>
+        <span class="lib-file" id="libFileInfo">图形库从云端加载</span>
       </div>
       <div class="lib-toolbar">
         <select class="lib-select" id="libCat" title="按类别筛选">
@@ -1666,25 +1927,35 @@
         </select>
         <select class="lib-select" id="libFilter" title="按类型筛选">
           <option value="all">全部类型</option>
-          <option value="custom">仅自定义（可删除）</option>
+          <option value="combo">仅组合模型</option>
+          <option value="dev">仅开发者模型</option>
           <option value="builtin">仅内置</option>
           <option value="anim">仅动画</option>
         </select>
-        <button class="mbtn ghost" id="libSelAll" style="height:32px;padding:0 12px;font-size:12.5px;box-shadow:none;">全选自定义</button>
+        <button class="mbtn ghost" id="libSelAll" style="height:32px;padding:0 12px;font-size:12.5px;box-shadow:none;">全选可删除</button>
         <button class="mbtn ghost" id="libSelNone" style="height:32px;padding:0 12px;font-size:12.5px;box-shadow:none;">清空</button>
       </div>
-      <div class="lib-list" id="libList"></div>
-      <div class="tip-line" style="margin-top:12px;">
-        · <b>自定义（组合）图形</b>：勾选后可删除，会从 shapes.js 中移除对应的 <b>shape({...})</b> 代码块。<br>
-        · <b>内置 / 动画图形</b>：不可删除，点右侧 <b>眼睛按钮</b> 可隐藏（状态会被浏览器记住，刷新后仍保持隐藏）。<br>
-        · 画布上正在使用被删除图形的对象会一并清理（可用 <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> 撤销）。
+      <div class="lib-toolbar">
+        <input type="text" class="lib-input" id="libSearch"
+               placeholder="🔍 搜索名称 / key / 类别…" autocomplete="off">
       </div>
+      <div class="lib-list" id="libList"></div>
+<div class="tip-line" style="margin-top:12px;">
+  · <b>自定义（组合）图形</b>：勾选后可删除，会从本机组合记录中移除。<br>
+  · <b>内置 / 动画图形</b>：不可删除，点右侧 <b>眼睛按钮</b> 可隐藏（状态会被记住，重启后仍保持隐藏）。<br>
+  · 画布上正在使用被删除图形的对象会一并清理（可用 <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> 撤销）。
+</div>
     </div>
+    <!-- 1) 底部按钮条（缺 #libCancel / #libDevBtn / #libDelete 会导致关闭/删除失效） -->
     <div class="modal-foot" style="justify-content:space-between;">
-      <button class="mbtn ghost" id="libCancel">关闭</button>
+      <div style="display:flex;gap:10px;">
+        <button class="mbtn ghost" id="libCancel">关闭</button>
+        <button class="mbtn ghost" id="libDevBtn" title="编写自定义图形代码（shapes-self.js）">开发者代码</button>
+      </div>
       <button class="mbtn danger" id="libDelete" disabled>删除选中</button>
     </div>
 
+    <!-- 2) 删除二次确认弹层（缺 #libConfirm / #libConfirmBody / #libConfirmBack / #libConfirmOk 会导致点删除报错） -->
     <div class="lib-confirm-mask" id="libConfirm">
       <div class="lib-confirm-box">
         <div class="lib-confirm-title">⚠ 确认删除</div>
@@ -1698,8 +1969,443 @@
   </div>
 </div>
 
-<script src="shapes.js"></script>
+<div class="modal" id="selfShapesModal">
+  <div class="modal-card" style="max-width:960px;">
+    <div class="modal-head">开发者自定义图形 · shapes-self.js</div>
+    <div class="modal-body">
+
+      <!-- 顶部简介 -->
+      <p style="font-size:12.5px;color:#8fa3c0;margin:0 0 12px;">
+        在这里写图形定义代码。保存后会自动追加到程序目录的
+        <b style="color:#7dd3fc;">shapes-self.js</b>，立即生效；文件不存在会自动创建。
+      </p>
+
+      <!-- 示例栏 -->
+      <div class="self-example-bar">
+        <span class="self-example-label">📦 示例：</span>
+        <button class="self-example-btn" data-example="star">
+          ⭐ 简单图形
+          <span class="self-example-sub">五角星 · 22 行</span>
+        </button>
+        <button class="self-example-btn" data-example="magfocus">
+          🎬 动画图形
+          <span class="self-example-sub">磁聚焦模型 · 240 行</span>
+        </button>
+        <button class="self-example-btn self-example-guide" data-example="guide">
+          🎓 DeepSeek 教你写
+          <span class="self-example-sub">不会写就让 AI 帮你</span>
+        </button>
+      </div>
+
+      <!-- 示例详情（点击示例后展开） -->
+      <div class="self-example-detail" id="selfExampleDetail"></div>
+
+      <!-- 编辑区 -->
+      <div class="self-editor-head">
+        <span>编辑区</span>
+        <span id="selfEditorHint" style="color:#6b7c96;font-size:11.5px;">
+          支持直接粘贴 / 修改，保存前会先执行验证
+        </span>
+      </div>
+      <textarea id="selfShapesCode"
+        style="width:100%;min-height:320px;max-height:46vh;padding:12px;
+          background:rgba(8,16,32,.6);border:1px solid rgba(120,180,255,.22);
+          border-radius:10px;color:#e6edf7;
+          font-family:ui-monospace,Menlo,Consolas,monospace;
+          font-size:12.5px;line-height:1.65;outline:none;resize:vertical;"
+        spellcheck="false"
+        placeholder="// 点击上方示例 → 复制 / 插入 → 保存并执行&#10;// 也可以直接粘贴你写好的 shape({...}) 代码"></textarea>
+
+      <!-- 状态 -->
+      <div id="selfShapesStatus" style="margin-top:10px;min-height:18px;font-size:12px;color:#8fa3c0;"></div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn ghost" id="selfShapesCancel">关闭</button>
+      <button class="mbtn ghost" id="selfShapesClear">清空编辑区</button>
+      <button class="mbtn" id="selfShapesSave">保存并执行</button>
+    </div>
+  </div>
+</div>
+
 <script src="license.js"></script>
-<script src="app.js"></script>
+
+<script>
+(function () {
+'use strict';
+
+/* ============================================================
+ *  主程序加载器
+ *  负责：授权检查 → 拉取 app.js → 缓存 → 版本比对 → 执行
+ * ============================================================ */
+
+const API_BASE = 'https://api.tangzhanglao123.cn';
+const APP_FILE = 'app.js';
+const VER_FILE = 'app.version';
+const BAK_FILE = 'app.js.bak';
+const SKIP_KEY = 'pb_skip_app_update';
+const TIMEOUT = 15000;
+
+/* ---------- 工具 ---------- */
+function fetchWithTimeout(url, opts, ms) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms || TIMEOUT);
+  return fetch(url, Object.assign({}, opts, { signal: ctrl.signal }))
+    .finally(() => clearTimeout(timer));
+}
+
+function showLoading(text) {
+  let el = document.getElementById('__pb_loader');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = '__pb_loader';
+    el.style.cssText =
+      'position:fixed;inset:0;z-index:99998;display:flex;align-items:center;' +
+      'justify-content:center;background:rgba(6,12,24,.92);backdrop-filter:blur(12px);' +
+      'font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;' +
+      'color:#8fa3c0;font-size:14px;letter-spacing:.5px;';
+    document.body.appendChild(el);
+  }
+  el.innerHTML =
+    '<div style="text-align:center;">' +
+      '<div style="width:36px;height:36px;margin:0 auto 16px;border:3px solid rgba(56,189,248,.2);' +
+      'border-top-color:#38bdf8;border-radius:50%;animation:__pbSpin .8s linear infinite;"></div>' +
+      '<div>' + (text || '正在启动…') + '</div>' +
+    '</div>';
+  if (!document.getElementById('__pbLoaderStyle')) {
+    const s = document.createElement('style');
+    s.id = '__pbLoaderStyle';
+    s.textContent = '@keyframes __pbSpin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+}
+
+function hideLoading() {
+  const el = document.getElementById('__pb_loader');
+  if (el) el.remove();
+}
+
+function fatal(title, msg) {
+  hideLoading();
+  document.body.innerHTML =
+    '<div style="max-width:540px;margin:100px auto;padding:30px 34px;' +
+    'background:linear-gradient(160deg,rgba(24,36,60,.98),rgba(14,22,40,.98));' +
+    'border:1px solid rgba(120,180,255,.25);border-radius:20px;' +
+    'color:#fca5a5;font-family:system-ui,sans-serif;line-height:1.85;' +
+    'box-shadow:0 30px 80px rgba(0,8,24,.7);">' +
+    '<b style="color:#fff;font-size:17px;">' + title + '</b><br><br>' +
+    '<span style="color:#b8c7de;">' + msg + '</span></div>';
+}
+
+function askUpdate(localVer, cloudVer) {
+  return new Promise(resolve => {
+    const wrap = document.createElement('div');
+    wrap.className = 'modal show';
+    wrap.style.zIndex = '99999';
+    wrap.innerHTML =
+      '<div class="modal-card" style="max-width:440px;">' +
+        '<div class="modal-head">发现新版主程序</div>' +
+        '<div class="modal-body">' +
+          '<p style="font-size:13px;color:#b8c7de;">' +
+            '本地版本：<b>' + (localVer || '未知') + '</b><br>' +
+            '云端版本：<b>' + cloudVer + '</b>' +
+          '</p>' +
+          '<div class="tip-line">' +
+            '更新会下载新的主程序文件，<b>下次启动生效</b>。' +
+            '本次会话继续使用旧版本。' +
+          '</div>' +
+        '</div>' +
+        '<div class="modal-foot">' +
+          '<button class="mbtn ghost" data-ans="no">暂不更新</button>' +
+          '<button class="mbtn" data-ans="yes">立即更新</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+
+    let done = false;
+    function finish(v) {
+      if (done) return;
+      done = true;
+      document.removeEventListener('keydown', onKey, true);
+      wrap.remove();
+      resolve(v);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') { e.stopPropagation(); finish('no'); }
+    }
+    wrap.addEventListener('click', e => {
+      const btn = e.target.closest('[data-ans]');
+      if (btn) finish(btn.dataset.ans);
+    });
+    document.addEventListener('keydown', onKey, true);
+  });
+}
+
+/* ---------- 主流程 ---------- */
+(async function boot() {
+  try {
+    showLoading('正在检查授权…');
+
+    /* ① 等 license.js 就绪 */
+    if (!window.__pbFS || !window.__pbLicense) {
+      fatal('授权模块未就绪', '请确认 license.js 与 index.html 在同一目录，并已正确引入。');
+      return;
+    }
+
+    /* ② 授权检查（内部处理激活 / 静默续期 / 弹窗） */
+    const licensed = await window.__pbLicense.ensureActivated();
+    if (!licensed) {
+      hideLoading();
+      return;
+    }
+
+    const fs = window.__pbFS;
+    const token = window.__pbLicense.getToken();
+
+    /* ③ 读本地 app.js 和版本 */
+    showLoading('正在检查主程序…');
+    let localCode = null;
+    let localVer = '';
+    try {
+      localCode = await fs.readFile(APP_FILE);
+      const verTxt = await fs.readFile(VER_FILE);
+      localVer = (verTxt || '').trim();
+    } catch (e) {}
+
+    /* ④ 拉云端版本 */
+    let cloudVer = '';
+    try {
+      const r = await fetchWithTimeout(API_BASE + '/api/app/version', {}, 5000);
+      if (r.ok) {
+        const j = await r.json();
+        cloudVer = j.version || '';
+      }
+    } catch (e) {
+      console.warn('[loader] 检查 app 版本失败：', e);
+    }
+
+    /* ⑤ 本地没有 → 必须从云端下载 */
+    if (!localCode) {
+      showLoading('首次启动，正在下载主程序…');
+      if (!cloudVer) {
+        fatal('首次启动失败', '无法从云端下载主程序，请检查网络连接后重启应用。');
+        return;
+      }
+      let r;
+      try {
+        r = await fetchWithTimeout(API_BASE + '/api/app', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        }, 30000);
+      } catch (e) {
+        fatal('首次启动失败', '下载主程序超时，请检查网络连接后重启应用。');
+        return;
+      }
+      if (!r.ok) {
+        fatal('下载主程序失败', '服务器返回 ' + r.status + '，请稍后重试。');
+        return;
+      }
+      localCode = await r.text();
+      if (!localCode || localCode.length < 5000) {
+        fatal('下载内容异常', '主程序文件过短，可能是网络中断，请重启应用。');
+        return;
+      }
+      await fs.writeFile(APP_FILE, localCode);
+      await fs.writeFile(VER_FILE, cloudVer);
+      localVer = cloudVer;
+      console.log('[loader] app.js 首次下载完成，版本 ' + cloudVer);
+    }
+
+    /* ⑥ 有新版 → 询问用户是否更新 */
+    if (cloudVer && cloudVer !== localVer) {
+      let skipVer = '';
+      try { skipVer = localStorage.getItem(SKIP_KEY) || ''; } catch (e) {}
+
+      if (skipVer === cloudVer) {
+        console.log('[loader] 用户已忽略版本 ' + cloudVer);
+      } else {
+        hideLoading();
+        const ans = await askUpdate(localVer, cloudVer);
+        if (ans === 'yes') {
+          showLoading('正在下载新版主程序…');
+          try {
+            const r = await fetchWithTimeout(API_BASE + '/api/app', {
+              headers: { 'Authorization': 'Bearer ' + token }
+            }, 30000);
+            if (r.ok) {
+              const newCode = await r.text();
+              if (newCode.length > 5000 && newCode.trim().endsWith('})();')) {
+                try { await fs.writeFile(BAK_FILE, localCode); } catch (e) {}
+                await fs.writeFile(APP_FILE, newCode);
+                await fs.writeFile(VER_FILE, cloudVer);
+                console.log('[loader] 已下载新版 ' + cloudVer + '，下次启动生效');
+              } else {
+                console.warn('[loader] 新版内容异常，放弃更新');
+              }
+            }
+          } catch (e) {
+            console.warn('[loader] 更新下载失败：', e);
+          }
+        } else {
+          try { localStorage.setItem(SKIP_KEY, cloudVer); } catch (e) {}
+        }
+      }
+    }
+
+    /* ⑦ 执行 app.js */
+    showLoading('正在启动白板…');
+    try {
+      const script = document.createElement('script');
+      script.textContent = localCode;
+      document.head.appendChild(script);
+    } catch (e) {
+      console.error('[loader] app.js 执行异常：', e);
+      try {
+        const bak = await fs.readFile(BAK_FILE);
+        if (bak) {
+          await fs.writeFile(APP_FILE, bak);
+          fatal('主程序加载失败', '已回滚到上一个可用版本，请重启应用。\n\n' + e.message);
+          return;
+        }
+      } catch (e2) {}
+      fatal('主程序加载失败', e.message || '请重启应用。');
+      return;
+    }
+
+    if (!window.PhysBoard) {
+      fatal('主程序加载异常', 'PhysBoard 未初始化，可能文件损坏。请删除程序目录下的 app.js 后重启。');
+      return;
+    }
+
+    hideLoading();
+    console.log('[loader] app.js 已启动，版本 ' + localVer);
+
+  } catch (e) {
+    console.error('[loader] 启动异常', e);
+    fatal('启动失败', e.message || '发生未知错误，请重启应用。');
+  }
+})();
+
+})();
+</script>
+
+
+
+
+
+<script>
+/* ================ 悬浮球：拖动 / 隐藏工具栏 ================ */
+(function initFloatingBall() {
+  if (document.getElementById('__pb_ball')) return;
+
+  const ball = document.createElement('div');
+  ball.id = '__pb_ball';
+  ball.title = '单击：显示/隐藏工具栏  ·  拖动：移动位置';
+  ball.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;">
+      <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+    </svg>`;
+  ball.style.cssText = `
+    position:fixed; z-index:999999; left:auto; right:24px; top:50%;
+    width:56px; height:56px; border-radius:50%;
+    background:linear-gradient(135deg,#38bdf8,#818cf8);
+    box-shadow:0 6px 24px rgba(56,189,248,.55), 0 0 0 2px rgba(255,255,255,.15) inset;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; cursor:grab; user-select:none; touch-action:none;
+    transition:transform .15s, box-shadow .2s, opacity .25s;
+  `;
+  document.body.appendChild(ball);
+
+  // 恢复位置
+  try {
+    const saved = JSON.parse(localStorage.getItem('pb_ball_pos') || 'null');
+    if (saved && typeof saved.left === 'number') {
+      ball.style.left = saved.left + 'px';
+      ball.style.top = saved.top + 'px';
+      ball.style.right = 'auto';
+    }
+  } catch (e) {}
+
+  let dragging = false, moved = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+
+  ball.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    dragging = true; moved = false;
+    startX = e.clientX; startY = e.clientY;
+    const rect = ball.getBoundingClientRect();
+    startLeft = rect.left; startTop = rect.top;
+    ball.setPointerCapture(e.pointerId);
+    ball.style.transition = 'none';
+    ball.style.cursor = 'grabbing';
+    ball.style.transform = 'scale(.94)';
+  });
+
+  ball.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX, dy = e.clientY - startY;
+    if (!moved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) moved = true;
+    if (!moved) return;
+    let nl = startLeft + dx, nt = startTop + dy;
+    nl = Math.max(8, Math.min(window.innerWidth - 64, nl));
+    nt = Math.max(8, Math.min(window.innerHeight - 64, nt));
+    ball.style.left = nl + 'px';
+    ball.style.top = nt + 'px';
+    ball.style.right = 'auto';
+  });
+
+  ball.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging = false;
+    ball.style.transition = '';
+    ball.style.cursor = 'grab';
+    ball.style.transform = '';
+
+    if (moved) {
+      try {
+        const rect = ball.getBoundingClientRect();
+        localStorage.setItem('pb_ball_pos', JSON.stringify({ left: rect.left, top: rect.top }));
+      } catch (err) {}
+      return;
+    }
+
+    // 单击：切换工具栏显示/隐藏
+    toggleToolbar();
+  });
+
+  ball.addEventListener('pointercancel', () => {
+    dragging = false;
+    ball.style.transition = '';
+    ball.style.transform = '';
+  });
+
+  // --- 工具栏显隐逻辑 ---
+  let toolbarHidden = false;
+  const TOOLBAR_SELECTORS = [
+    '.dock', '.corner-bl', '.corner-br',
+    '.panel', '.sub-panel', '.sel-bar',
+    '.thumb-panel', '.menu-pop'
+  ];
+
+  function toggleToolbar() {
+    toolbarHidden = !toolbarHidden;
+    TOOLBAR_SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.style.transition = 'opacity .22s';
+        el.style.opacity = toolbarHidden ? '0' : '';
+        el.style.pointerEvents = toolbarHidden ? 'none' : '';
+        if (!toolbarHidden) {
+          el.style.visibility = '';
+        } else {
+          setTimeout(() => {
+            if (toolbarHidden) el.style.visibility = 'hidden';
+          }, 230);
+        }
+      });
+    });
+    ball.style.opacity = toolbarHidden ? '0.4' : '';
+  }
+})();
+</script>
+
 </body>
 </html>
